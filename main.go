@@ -4,18 +4,18 @@ package main
       "fmt"
       "net/http"
       "html/template"
-      "encoding/json"
-//      "strings"
+     "encoding/json"
+     "strings"
       "regexp"
       "log"
-//    "io/ioutil"
+   "io/ioutil"
   )
 
   type Asset struct{
-      ID []int
+      ID string
       Title []string
       Subtitle []string
-      _version int64
+      _version_ int64
       id string
   }
 
@@ -40,14 +40,18 @@ package main
     }
 
     defer res.Body.Close()
-    //body, err :=ioutil.ReadAll(res.Body)
+    body, err :=ioutil.ReadAll(res.Body)
 
-    fmt.Println("body %s\n", res.Body)
-    dec := json.NewDecoder(res.Body)
+    stringbody := string(body[:])
+
+    fmt.Println("body %s\n", stringbody)
+    dec := json.NewDecoder(strings.NewReader(stringbody))
 
     var a Asset
     err = dec.Decode(&a)
-
+    if err != nil{
+        log.Fatal(err)
+    }
     return &a, nil
 
     /*
