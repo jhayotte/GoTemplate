@@ -17,29 +17,18 @@ package main
 
   /*Return a Single Asset according a title*/
   func  GetAsset(title string) (*Asset, error){
-    //Moke result of SearchAWS of Valerio's method
+    //Mock result of SearchAWS of Valerio's method
     const searchAws =
     `
       {"Title":"title1", "Subtitle": "example subtitle 1" }
       {"Title":"title2", "Subtitle": "example subtitle 2" }
     `
-
     var a Asset
     dec := json.NewDecoder(strings.NewReader(searchAws))
     err := dec.Decode(&a);
     if err != nil{
         log.Fatal(err)
     }
-
-    /*for{
-        if err := dec.Decode(&a); err == io.EOF{
-            break
-        } else if err != nil{
-            log.Fatal(err)
-        }
-        fmt.Printf("%s: %s\n", a.Title, a.Subtitle)
-    }
-    */
     return &a, nil
   }
 
@@ -59,6 +48,7 @@ package main
       }
       renderTemplate(w,"view",p)
   }
+
 
   var templates = template.Must(template.ParseFiles("edit.html","view.html"))
 
