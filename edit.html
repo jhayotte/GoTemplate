@@ -1,0 +1,7 @@
+<h1>Editing {{.Title}}</h1>
+<p>You can edit your asset in this page</p>
+
+
+<div><textarea anme="body" rows="10" cols="40">{{printf "%s" .Subtitle}}</textarea></div>
+<div><input type="submit" value="Save"></div>
+<p>[ <a href="/view/{{.Title}}"> return to view </a>]</p>
